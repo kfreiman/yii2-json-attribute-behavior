@@ -1,0 +1,22 @@
+{
+    "name": "kfreiman/yii2-json-attribute-behavior",
+    "description": "Yii2 Behavior for encode and decode json stored attributes",
+    "type": "yii2-extension",
+    "keywords": ["yii", "yii2", "serialize", "serialized", "encode", "decode", "attribute",  "attributes", "behavior", "array", "json"],
+    "license": "MIT",
+    "homepage": "https://github.com/kfreiman/yii2-json-attribute-behavior",
+    "authors": [
+        {
+            "name": "Kirill Freiman",
+            "email": "k.freiman@ya.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "kfreiman\\yii\\behaviors\\model\\": ""
+        }
+    }
+}
