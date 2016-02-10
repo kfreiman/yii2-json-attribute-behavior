@@ -13,15 +13,18 @@ use yii\db\BaseActiveRecord;
  */
 class JsonAttributeBehavior extends Behavior
 {
+
     /**
      * @var string[] Attributes you want to be encoded
      */
     public $attributes = [];
 
+
     /**
      * @var array store old attributes
      */
     private $_oldAttributes = [];
+
 
     public function events()
     {
@@ -35,6 +38,7 @@ class JsonAttributeBehavior extends Behavior
         ];
     }
 
+
     public function encodeAttributes()
     {
         foreach ($this->attributes as $attribute) {
@@ -46,6 +50,7 @@ class JsonAttributeBehavior extends Behavior
         }
     }
 
+
     public function decodeAttributes()
     {
         foreach ($this->attributes as $attribute) {
@@ -54,6 +59,22 @@ class JsonAttributeBehavior extends Behavior
             $value = json_decode($this->owner->$attribute);
             $this->owner->setAttribute($attribute, $value);
             $this->owner->setOldAttribute($attribute, $value);
+        }
+    }
+
+
+    public function canGetProperty($name, $checkVars = true)
+    {
+        return in_array($name, array_keys($this->attributes));
+    }
+
+
+    public function __get($name)
+    {
+        foreach ($this->attributes as $rawAttr => $attr) {
+            if ($name == $rawAttr) {
+                return $this->_oldAttributes[$attr];
+            }
         }
     }
 }
