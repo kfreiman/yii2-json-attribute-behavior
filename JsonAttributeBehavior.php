@@ -19,6 +19,10 @@ class JsonAttributeBehavior extends Behavior
      */
     public $attributes = [];
 
+    /**
+     * @var bool How to decode JSON
+     */
+    public $asArray = false;
 
     /**
      * @var array store old attributes
@@ -56,7 +60,7 @@ class JsonAttributeBehavior extends Behavior
         foreach ($this->attributes as $attribute) {
             $this->_oldAttributes[$attribute] = $this->owner->getOldAttribute($attribute);
 
-            $value = json_decode($this->owner->$attribute);
+            $value = json_decode($this->owner->$attribute, $this->asArray);
             $this->owner->setAttribute($attribute, $value);
             $this->owner->setOldAttribute($attribute, $value);
         }
